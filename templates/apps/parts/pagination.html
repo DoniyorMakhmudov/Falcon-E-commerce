@@ -1,10 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="card-footer border-top d-flex justify-content-center">
+    {% if page_obj.has_previous %}
+        <a class="btn btn-falcon-default btn-sm me-2"
+           href="?page={{ page_obj.previous_page_number }}"
+           data-bs-toggle="tooltip" data-bs-placement="top" title="Prev">
+            <span class="fas fa-chevron-left"></span>
+        </a>
+    {% endif %}
 
-</body>
-</html>
+    {% if page_obj.number > 2 %}
+        <a class="btn btn-sm btn-falcon-default me-2" href="?page={{ page_obj.previous_page_number }}">
+            {{ page_obj.number|add:-1 }}</a>
+    {% endif %}
+
+    <a class="btn btn-sm btn-falcon-default text-primary me-2" href="#!">{{ page_obj.number }}</a>
+
+    {% if page_obj.number < page_obj.paginator.num_pages %}
+        <a class="btn btn-sm btn-falcon-default me-2"
+           href="?page={{ page_obj.next_page_number }}">{{ page_obj.number|add:1 }}</a>
+    {% endif %}
+
+    {% if page_obj.has_next %}
+        <a class="btn btn-sm btn-falcon-default me-2"
+           href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+
+        <a class="btn btn-falcon-default btn-sm"
+           href="?page={{ page_obj.next_page_number }}"
+           data-bs-toggle="tooltip" data-bs-placement="top" title="Next">
+            <span class="fas fa-chevron-right"></span>
+        </a>
+    {% endif %}
+
+</div>
